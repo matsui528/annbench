@@ -1,0 +1,13 @@
+algo:
+  name: linear
+
+  param_index:
+    siftsmall:
+      - {filename: index.bin}
+    sift1m:
+      - {filename: index.bin}
+
+  param_query:
+    siftsmall: [{dummy: 0}]
+    sift1m: [{dummy: 0}]
+

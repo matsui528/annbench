@@ -1,0 +1,19 @@
+# Default parameters for dataest and algorithm
+defaults:
+  - dataset: siftsmall
+  - algo: annoy
+
+# Directories for data
+interim: ./interim
+output: ./output
+
+
+# Hydra config. This needs not be changed.
+# Make sure that single-run and multi-run result in the same directory structure
+# https://github.com/facebookresearch/hydra/blob/master/hydra/conf/hydra/output/default.yaml
+hydra:
+  run:
+    dir: log/${now:%Y-%m-%d}/${now:%H-%M-%S}/0
+  sweep:
+    dir: log/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
