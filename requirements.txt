@@ -1,4 +1,5 @@
 hydra-core
 psutil
+matplotlib
 annoy
 hnswlib
