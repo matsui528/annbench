@@ -105,13 +105,13 @@ Don't forget to update [proxy.py](annbench/algo/dataset.py).
 - In addition to editing the config files, you can override values from the commandline thanks to [hydra](https://hydra.cc/), e.g, `python run.py interim=SOMEWHERE/LARGEHDD/interim`.
 
 
-### Launch on AWS [todo]
+### Launch on AWS
 - Run the following commands on a fresh AWS EC2 instance to reproduce the result
   ```bash
   sudo apt -y update
   sudo apt -y upgrade
   sudo apt -y install build-essential
-  wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh -O $HOME/anaconda.sh
+  wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh -O $HOME/anaconda.sh  
   bash $HOME/anaconda.sh -b -p $HOME/anaconda
   echo 'export PATH="$HOME/anaconda/bin:$PATH"' >> $HOME/.bashrc
   source $HOME/.bashrc
