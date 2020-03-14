@@ -9,6 +9,7 @@ Benchmarking scripts for approximate nearest neighbor search algorithms in Pytho
 - Sweep by a single query parameter
 - Seach with a single thread
 
+## [Leaderboard](https://github.com/matsui528/annbench_leaderboard)
 
 ## Getting started
 ```bash
