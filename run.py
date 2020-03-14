@@ -44,7 +44,6 @@ def main(cfg: DictConfig) -> None:
             algo.write(path=str(p))
 
         ret = []
-
         # Run search for each param_query
         for param_query in cfg.algo.param_query[cfg.dataset.name]:
             log.info("Start to search. param_query=" + str(param_query))
@@ -57,6 +56,7 @@ def main(cfg: DictConfig) -> None:
                 "runtime_per_query": float(runtime_per_query),
                 "recall": float(recall)
             })
+            log.info("Finish")
 
         ret_all.append(ret)
 
