@@ -75,7 +75,7 @@ The class must inherit `BaseANN` class. See [annoy.py](annbench/algo/annoy.py) f
 - To add a new dataset, in the same as adding a new algorithm, 
 you can write a wrapper class that inherits `BaseDataset` on `./annbench/dataset`.
 An simple example is  [siftsmall.py](annbench/dataset/siftsmall.py).
-Don't forget to update [proxy.py](annbench/algo/dataset.py).
+Don't forget to update [proxy.py](annbench/dataset/proxy.py).
 - Feel free to send a PR!
 
 
