@@ -17,8 +17,8 @@ git clone https://github.com/matsui528/annbench.git
 cd annbench
 pip install -r requirements.txt
 # conda install faiss-cpu -y -c pytorch  # If you'd like to try faiss, run this on anaconda
-python download.py dataset=siftsmall  # Donloaded on ./dataset
-python run.py dataset=siftsmall algo=annoy  # Indexes are on ./interim. Results are on ./output
+python download.py dataset=siftsmall  # Downloaded on ./dataset
+python run.py dataset=siftsmall algo=annoy  # Indices are on ./interim. Results are on ./output
 python plot.py   # Plots are on ./result_img
 ```
 
@@ -44,6 +44,7 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 - Evaluate a target algorithm (`ALGO`) with a target dataset (`DATASET`) by `python run.py dataset=DATASET algo=ALGO`. You can run multiple algorithms on multiple datasets by `python run.py --multirun dataset=DATASET1,DATASET2 algo=ALGO1,ALGO2`.
 - Indices (data structures for search) are stored on `./interim`. They are reused for each run with different query parameters.
 - The search result will be on `./output`. The same file will be on `./log` as well. For example with `algo=annoy` and `dataset=siftsmall`, the result file is `./output/siftsmall/annoy/result.yaml`, and it is identical to something like `./log/2020-03-11/22-30-59/0/result.yaml`.
+- By default, we run each algorithm `num_trial=10` times and return the average runtime. You can change this by: `python run.py num_trial=5`
 
 ### Plot
 - You can visualize the search result by `python plot.py`. This script checks `./output` and generate figures for each dataset on `./result_img`.
@@ -118,5 +119,4 @@ Don't forget to update [proxy.py](annbench/dataset/proxy.py).
 ## Todo
 - evaluate memory consumption
 - default parameter
-- run multiple times and take an average
 - billion-scale evaluation

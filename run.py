@@ -5,6 +5,7 @@ import logging
 from pathlib import Path
 import annbench
 import yaml
+import numpy as np
 
 log = logging.getLogger(__name__)
 
@@ -47,9 +48,9 @@ def main(cfg: DictConfig) -> None:
         # Run search for each param_query
         for param_query in cfg.algo.param_query[cfg.dataset.name]:
             log.info("Start to search. param_query=" + str(param_query))
-            runtime_per_query, recall =\
-                annbench.util.evaluate(algo=algo, vecs_query=dataset.vecs_query(), gt=dataset.groundtruth(),
-                                       topk=1, r=1, param_query=param_query)
+            runtime_per_query, recall = np.mean(
+                [annbench.util.evaluate(algo=algo, vecs_query=dataset.vecs_query(), gt=dataset.groundtruth(),
+                                        topk=1, r=1, param_query=param_query) for _ in range(cfg.num_trial)], axis=0)
             ret.append({
                 "param_index": dict(param_index),
                 "param_query": dict(param_query),

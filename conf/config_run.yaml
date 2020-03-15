@@ -7,6 +7,9 @@ defaults:
 interim: ./interim
 output: ./output
 
+# flags
+num_trial: 10
+
 
 # Hydra config. This needs not be changed.
 # Make sure that single-run and multi-run result in the same directory structure
