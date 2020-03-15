@@ -47,7 +47,8 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 
 ### Plot
 - You can visualize the search result by `python plot.py`. This script checks `./output` and generate figures for each dataset on `./result_img`.
-- In order not to print query parameters, set the flag false: `python plot.py with_query_param=false`.
+- As is the case in `run.py`, the same figure is written on `./log` as well.
+- In order not to print query parameters, you can set the flag false: `python plot.py with_query_param=false`.
 - To change the size of the image: `python plot.py width=15 height=10`
 
 

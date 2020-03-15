@@ -42,16 +42,16 @@ def main(cfg: DictConfig) -> None:
                 lines.append(line)
 
         log.info("Write on {}".format(result_img.resolve()))
-        annbench.vis.draw(lines=lines,
-                          xlabel="recall@1",
-                          ylabel="query/sec (1/s)",
-                          title=p_dataset.name,
-                          filename=result_img / "{}.png".format(p_dataset.name),
-                          with_ctrl=cfg.with_query_param,
-                          width=cfg.width, height=cfg.height)
 
-        with (result_img / "{}.yaml".format(p_dataset.name)).open("wt") as f:
-            yaml.dump(lines, f)
+        # Save the image on the result_img directory and a working directory (./log) as a log
+        for path_img in [result_img / "{}.png".format(p_dataset.name), "{}.png".format(p_dataset.name)]:
+            annbench.vis.draw(lines=lines, xlabel="recall@1", ylabel="query/sec (1/s)", title=p_dataset.name,
+                              filename=path_img, with_ctrl=cfg.with_query_param, width=cfg.width, height=cfg.height)
+
+        # Save the summary on the result_img directory and a working directory (./log) as a log
+        for path_summary in [result_img / "{}.yaml".format(p_dataset.name), "{}.yaml".format(p_dataset.name)]:
+            with open(path_summary, "wt") as f:
+                yaml.dump(lines, f)
 
 
 if __name__ == "__main__":
