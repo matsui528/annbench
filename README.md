@@ -101,7 +101,7 @@ Don't forget to update [proxy.py](annbench/dataset/proxy.py).
   ```
   In the search step, the index is read from the disk onto the memory first. Then we run the search three times, with `for nprobe in [1, 4, 16]`. This creates three results (three pairs of (recall, runtime)). By connecting these results, one polyline is drawn on the final plot.
 - Note that the values of the above query parameter must be sorted. If you forget to sort (e.g., `[{"nprobe": 4}, {"nprobe":1}, {"nprobe": 16}]`), the final graph would become weird.
-- We don't exhaustively evaluate all parameter combinations (e.g., M={4,8,16} * nlist={100, 200, 400} could result in nine indices). Instead, we evaluate some typical parameter configurations only, e.g., {M=4, nlist=100}, {M=8, nlist=100}, and so on. This is because nobody can check all parameter combinations for their own large-scale data in the real world scenario. We believe the scores with typical parameter settings are more important. A good algorithm should achieve a good result with the default parameter.
+
 
 ### Dynamic configuration from the command line
 - In addition to editing the config files, you can override values from the commandline thanks to [hydra](https://hydra.cc/), e.g, `python run.py interim=SOMEWHERE/LARGEHDD/interim`.
