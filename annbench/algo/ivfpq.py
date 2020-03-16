@@ -47,6 +47,7 @@ class IvfpqANN(BaseANN):
         self.index = faiss.read_index(path)
         self.M, self.nlist = self.index.pq.M, self.index.nlist
 
-
+    def stringify_index_param(self, param):
+        return "M{}_nlist{}.bin".format(param["M"], param["nlist"])
 
 

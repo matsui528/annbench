@@ -37,6 +37,8 @@ class LinearANN(BaseANN):
     def read(self, path, D=None):
         self.index = faiss.read_index(path)
 
+    def stringify_index_param(self, param):
+        return "index.bin"
 
 
 

@@ -37,7 +37,7 @@ def main(cfg: DictConfig) -> None:
                 line = {
                     "xs": xs, "ys": ys, "ctrls": ctrls,
                     "ctrl_label": list(ret[0]['param_query'])[0],  # Just extract the name of query param
-                    "label": p_algo.name + "(" + annbench.util.stringify_dict(d=ret[0]['param_index'], ignore_key="filename") + ")"
+                    "label": p_algo.name + "(" + annbench.util.stringify_dict(d=ret[0]['param_index']) + ")"
                 }
                 lines.append(line)
 

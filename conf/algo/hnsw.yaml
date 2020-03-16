@@ -3,12 +3,12 @@ algo:
 
   param_index:
     siftsmall:
-      - {ef_construction: 200, M: 8, filename: efc200_M8.bin}
-      - {ef_construction: 200, M: 16, filename: efc200_M16.bin}
+      - {ef_construction: 100, M: 4}
+      - {ef_construction: 200, M: 32}
     sift1m:
-      - {ef_construction: 200, M: 8, filename: efc200_M8.bin}
-      - {ef_construction: 200, M: 16, filename: efc200_M16.bin}
+      - {ef_construction: 100, M: 4}
+      - {ef_construction: 200, M: 32}
 
   param_query:
-    siftsmall: [{ef: 1}, {ef: 10}, {ef: 100}]
-    sift1m: [{ef: 1}, {ef: 10}, {ef: 100}]
+    siftsmall: [{ef: 1}, {ef: 4}, {ef: 16}, {ef: 64}, {ef: 256}]
+    sift1m: [{ef: 1}, {ef: 4}, {ef: 16}, {ef: 64}, {ef: 256}]

@@ -3,13 +3,13 @@ algo:
 
   param_index:
     siftsmall:
-      - {M: 4, nlist: 100, filename: M4_nlist100.bin}
-      - {M: 16, nlist: 100, filename: M8_nlist100.bin}
+      - {M: 8, nlist: 100}
+      - {M: 16, nlist: 100}
     sift1m:
-      - {M: 4, nlist: 1000, filename: M4_nlist1000.bin}
-      - {M: 16, nlist: 1000, filename: M8_nlist1000.bin}
+      - {M: 8, nlist: 1000}
+      - {M: 16, nlist: 1000}
 
   param_query:
-    siftsmall: [{nprobe: 1}, {nprobe: 4}, {nprobe: 16}]
-    sift1m: [{nprobe: 1}, {nprobe: 4}, {nprobe: 16}]
+    siftsmall: [{nprobe: 1}, {nprobe: 2}, {nprobe: 4}, {nprobe: 8}, {nprobe: 16}]
+    sift1m: [{nprobe: 1}, {nprobe: 2}, {nprobe: 4}, {nprobe: 8}, {nprobe: 16}]
 

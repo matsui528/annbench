@@ -32,4 +32,6 @@ class AnnoyANN(BaseANN):
         self.index.load(path, prefault=True)
         self.n_trees = self.index.get_n_trees()
 
+    def stringify_index_param(self, param):
+        return "ntrees{}.bin".format(param["n_trees"])
 

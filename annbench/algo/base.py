@@ -31,3 +31,9 @@ class BaseANN(object):
         # Some algorithms require D to read an index
         pass
 
+    def stringify_index_param(self, param):
+        # Convert param_index to an identifier.
+        # The identifier will be used to name the index when writing it on the disk.
+        # e.g., if param={"M": 10, "K": 8}, return "M10_K8.bin".
+        pass
+

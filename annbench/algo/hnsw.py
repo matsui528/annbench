@@ -36,4 +36,7 @@ class HnswANN(BaseANN):
         self.index = hnswlib.Index(space='l2', dim=D)
         self.index.load_index(path_to_index=path)
 
+    def stringify_index_param(self, param):
+        return "efc{}_M{}.bin".format(param["ef_construction"], param["M"])
+
 

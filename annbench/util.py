@@ -2,18 +2,17 @@ import numpy as np
 import time
 
 
-def stringify_dict(d, ignore_key=None):
+def stringify_dict(d):
     """
     d = {"a", 123, "b", "xyz", "c": "hij"}
-    stringify_dict(d, ignore_key="b")
-    -> "a=1, c=hij"
+    stringify_dict(d)
+    -> "a=1, b=xyz, c=hij"
     """
-    assert len(d) != 0
+    if len(d) == 0:
+        return ""
     assert isinstance(d, dict)
     s = ""
     for k, v in d.items():
-        if k == ignore_key:
-            continue
         s += str(k) + "=" + str(v) + ", "
 
     return s[:-2]  # delete the last ", "

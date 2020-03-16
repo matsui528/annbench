@@ -3,12 +3,12 @@ algo:
 
   param_index:
     siftsmall:
-      - {n_trees: 200, filename: ntrees200.bin}
-      - {n_trees: 400, filename: ntrees400.bin}
+      - {n_trees: 200}
+      - {n_trees: 400}
     sift1m:
-      - {n_trees: 200, filename: ntrees200.bin}
-      - {n_trees: 400, filename: ntrees400.bin}
+      - {n_trees: 200}
+      - {n_trees: 400}
 
   param_query:
-    siftsmall: [{search_k: 100}, {search_k: 200}, {search_k: 400}]
-    sift1m: [{search_k: 100}, {search_k: 200}, {search_k: 400}]
+    siftsmall: [{search_k: 100}, {search_k: 200}, {search_k: 400}, {search_k: 800}]
+    sift1m: [{search_k: 100}, {search_k: 200}, {search_k: 400}, {search_k: 800}]
