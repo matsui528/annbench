@@ -30,8 +30,8 @@ def draw(lines, xlabel, ylabel, title, filename, with_ctrl, width, height):
                 plt.annotate(s=line["ctrl_label"] + ":" + str(ctrl), xy=(x, y),
                              xytext=(x, y+50))
 
-    plt.xlabel(xlabel=xlabel)
-    plt.ylabel(ylabel=ylabel)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
     plt.grid(which="both")
     plt.yscale("log")
     plt.legend()
