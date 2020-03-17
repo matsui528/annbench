@@ -27,8 +27,6 @@ def main(cfg: DictConfig) -> None:
         log.info("Start to build. index_param=" + str(param_index))
 
         # The absolute path to the index
-#        p = Path(to_absolute_path(cfg.interim)) / cfg.dataset.name / cfg.algo.name \
-#            / param_index.filename
         p = Path(to_absolute_path(cfg.interim)) / cfg.dataset.name / cfg.algo.name \
             / algo.stringify_index_param(param=param_index)
         p.parent.mkdir(exist_ok=True, parents=True)  # Make sure the parent directory exists
