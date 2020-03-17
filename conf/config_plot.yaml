@@ -1,3 +1,6 @@
+defaults:
+  - common
+
 # Directories for data
 output: ./output
 result_img: ./result_img
@@ -6,13 +9,3 @@ result_img: ./result_img
 with_query_param: true
 width: 10
 height: 8
-
-# Hydra config. This needs not be changed.
-# Make sure that single-run and multi-run result in the same directory structure
-# https://github.com/facebookresearch/hydra/blob/master/hydra/conf/hydra/output/default.yaml
-hydra:
-  run:
-    dir: log/${now:%Y-%m-%d}/${now:%H-%M-%S}/0
-  sweep:
-    dir: log/${now:%Y-%m-%d}/${now:%H-%M-%S}
-    subdir: ${hydra.job.num}
