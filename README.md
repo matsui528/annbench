@@ -7,7 +7,7 @@ Benchmarking scripts for approximate nearest neighbor search algorithms in Pytho
 - Support Recall@1 only
 - Support libraries that can be installed via pip/conda only
 - Sweep by a single query parameter
-- Seach with a single thread
+- Search with a single thread
 
 ## [Leaderboard](https://github.com/matsui528/annbench_leaderboard)
 
@@ -72,13 +72,15 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 
 ## Add new algorithms/datasets
 - To add a new algorithm, please write a wrapper class on `./annbench/algo`. 
-The class must inherit `BaseANN` class. See [annoy.py](annbench/algo/annoy.py) for examples. Finally, update [proxy.py](annbench/algo/proxy.py)
+The class must inherit `BaseANN` class. See [annoy.py](annbench/algo/annoy.py) for examples. Then please update [proxy.py](annbench/algo/proxy.py)
 - Add the name of the library on [requirements.txt](requirements.txt).
+- Add a config file on `./conf/algo`. 
 - Make sure the algorithm runs on a single thread
 - To add a new dataset, in the same as adding a new algorithm, 
 you can write a wrapper class that inherits `BaseDataset` on `./annbench/dataset`.
 An simple example is  [siftsmall.py](annbench/dataset/siftsmall.py).
 Don't forget to update [proxy.py](annbench/dataset/proxy.py).
+- Add a config file on `./conf/dataset`.
 - Feel free to send a PR!
 
 
@@ -94,19 +96,34 @@ Don't forget to update [proxy.py](annbench/dataset/proxy.py).
 - We define a simple guideline to set parameters. An algorithm has to have several **index parameters** and a single **query parameter**. For one set of index parameters, one **index (data structure)** is built. For this index, we run search by sweaping the query parameter.
 - For example with [ivfpq](conf/algo/ivfpq.yaml), let us consider the following index parameters:
   ```python
-  param_index={"M": 4, "nlist": 100, "filename": "M4_nlist100.bin"}
+  param_index={"M": 8, "nlist": 100}
   ```
-  With these parameters, one index (let us denote `ivfpq(M=4, nlist=100)`) is created, and will be stored as `M4_nlist100.bin`. 
+  With these parameters, one index (let us denote `ivfpq(M=8, nlist=100)`) is created.
+  This index is stored in the disk as `M8_nlist100.bin`, where the way of naming is defined in the function [stringify_index_param](annbench/algo/ivfpq.py).
   Here, a query parameter is defined as:
   ```python
-  param_query=[{"nprobe": 1}, {"nprobe": 4}, {"nprobe": 16}]
+  param_query={"nprobe": [1, 2, 4, 8, 16]}
   ```
-  In the search step, the index is read from the disk onto the memory first. Then we run the search three times, with `for nprobe in [1, 4, 16]`. This creates three results (three pairs of (recall, runtime)). By connecting these results, one polyline is drawn on the final plot.
-- Note that the values of the above query parameter must be sorted. If you forget to sort (e.g., `[{"nprobe": 4}, {"nprobe":1}, {"nprobe": 16}]`), the final graph would become weird.
+  In the search step, the index is read from the disk onto the memory first. Then we run the search five times, with `for nprobe in [1, 2, 4, 8, 16]`. This creates five results (five pairs of (recall, runtime)). By connecting these results, one polyline is drawn on the final plot.
+- Note that the values of the above query parameter must be sorted. If you forget to sort (e.g., `[1, 4, 2, 8, 16]`), the final graph would become weird.
+
+### Specialization
+- Index/query parameters for each algorithm is defined in `./conf/algo/`. These parameters are used for all datasets by default. If you'd like to specialize parameters for a dataset, you can defined the specialized version in `./conf/param/`.
+- For example, the default parameters for `ivfpq` is defined [here](conf/algo/ivfpq.yaml), where `nlist=100`. You can set `nlist=1000` for the sift1m dataset by adding a config file [here](conf/param/sift1m/ivfpq.yaml)
 
 
 ### Dynamic configuration from the command line
-- In addition to editing the config files, you can override values from the commandline thanks to [hydra](https://hydra.cc/), e.g, `python run.py interim=SOMEWHERE/LARGEHDD/interim`.
+- In addition to editing the config files, you can override values from the commandline thanks to [hydra](https://hydra.cc/).
+- Examples:
+  - Writing index structures on `SOMEWHEE/LARGE_HDD/`:
+    ```bash
+    python run.py interim=SOMEWHERE/LARGE_HDD/interim
+    ```
+  - Run the `ivfpq` algorithm with different query parameters:
+    ```bash
+    python run.py algo=ivfpq dataset=siftsmall param_query.nprobe=[1,5,25]
+    ```
+
 
 
 ## Reference

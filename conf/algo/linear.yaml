@@ -1,13 +1,10 @@
 algo:
   name: linear
 
-  param_index:
-    siftsmall:
-      - {}
-    sift1m:
-      - {}
+param_index:
+  - {}
 
-  param_query:
-    siftsmall: [{dummy: 0}]
-    sift1m: [{dummy: 0}]
+param_query:
+  dummy:
+    - 0
 

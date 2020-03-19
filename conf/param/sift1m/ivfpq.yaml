@@ -1,11 +1,8 @@
-algo:
-  name: ivfpq
-
 param_index:
   - M: 8
-    nlist: 100
+    nlist: 1000
   - M: 16
-    nlist: 100
+    nlist: 1000
 
 param_query:
   nprobe:
@@ -14,3 +11,4 @@ param_query:
     - 4
     - 8
     - 16
+

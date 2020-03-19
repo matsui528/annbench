@@ -3,6 +3,8 @@ defaults:
   - common
   - dataset: siftsmall
   - algo: annoy
+  - param: ${defaults.1.dataset}/${defaults.2.algo}
+    optional: true
 
 # Directories for data
 interim: ./interim

@@ -23,7 +23,7 @@ def main(cfg: DictConfig) -> None:
                                            path=to_absolute_path(cfg.dataset.path))
 
     ret_all = []
-    for param_index in cfg.algo.param_index[cfg.dataset.name]:
+    for param_index in cfg.param_index:
         log.info("Start to build. index_param=" + str(param_index))
 
         # The absolute path to the index
@@ -46,7 +46,9 @@ def main(cfg: DictConfig) -> None:
 
         ret = []
         # Run search for each param_query
-        for param_query in cfg.algo.param_query[cfg.dataset.name]:
+        pname, vals = next(cfg.param_query.items())  # e.g., pname="search_k", vals=[100, 200, 400]
+        for val in vals:
+            param_query = {pname: val}  # e.g., param_query={"search_k": 100}
             log.info("Start to search. param_query=" + str(param_query))
             runtime_per_query, recall = np.mean(
                 [annbench.util.evaluate(algo=algo, vecs_query=dataset.vecs_query(), gt=dataset.groundtruth(),

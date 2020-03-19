@@ -1,14 +1,16 @@
 algo:
   name: hnsw
 
-  param_index:
-    siftsmall:
-      - {ef_construction: 100, M: 4}
-      - {ef_construction: 200, M: 32}
-    sift1m:
-      - {ef_construction: 100, M: 4}
-      - {ef_construction: 200, M: 32}
+param_index:
+  - ef_construction: 100
+    M: 4
+  - ef_construction: 200
+    M: 32
 
-  param_query:
-    siftsmall: [{ef: 1}, {ef: 4}, {ef: 16}, {ef: 64}, {ef: 256}]
-    sift1m: [{ef: 1}, {ef: 4}, {ef: 16}, {ef: 64}, {ef: 256}]
+param_query:
+  ef:
+    - 1
+    - 4
+    - 16
+    - 64
+    - 256
