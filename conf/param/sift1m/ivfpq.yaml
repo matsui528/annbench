@@ -3,12 +3,3 @@ param_index:
     nlist: 1000
   - M: 16
     nlist: 1000
-
-param_query:
-  nprobe:
-    - 1
-    - 2
-    - 4
-    - 8
-    - 16
-
