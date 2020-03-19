@@ -6,8 +6,10 @@ Benchmarking scripts for approximate nearest neighbor search algorithms in Pytho
 - Support Euclidean distance only
 - Support Recall@1 only
 - Support libraries that can be installed via pip/conda only
-- Sweep by a single query parameter
 - Search with a single thread
+- Sweep by a single query parameter
+- Parameter specialization for each dataset
+- Dynamic configuration from the command line
 
 ## [Leaderboard](https://github.com/matsui528/annbench_leaderboard)
 
