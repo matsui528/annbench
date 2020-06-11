@@ -1,0 +1,10 @@
+algo:
+  name: linear_gpu
+
+param_index:
+  - {}
+
+param_query:
+  dummy:
+    - 0
+

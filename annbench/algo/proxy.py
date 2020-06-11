@@ -2,6 +2,7 @@ from .annoy import AnnoyANN
 from .ivfpq import IvfpqANN
 from .hnsw import HnswANN
 from .linear import LinearANN
+from .linear_gpu import LinearGpuANN
 
 def instantiate_algorithm(name):
     """
@@ -21,6 +22,8 @@ def instantiate_algorithm(name):
         return HnswANN()
     elif name == "linear":
         return LinearANN()
+    elif name == "linear_gpu":
+        return LinearGpuANN()
     else:
         return None
 
