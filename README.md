@@ -19,6 +19,7 @@ git clone https://github.com/matsui528/annbench.git
 cd annbench
 pip install -r requirements.txt
 # conda install faiss-cpu -y -c pytorch  # If you'd like to try faiss, run this on anaconda
+# conda install faiss-gpu -y -c pytorch  # or, if you have GPUs, install faiss-gpu
 python download.py dataset=siftsmall  # Downloaded on ./dataset
 python run.py dataset=siftsmall algo=annoy  # Indices are on ./interim. Results are on ./output
 python plot.py   # Plots are on ./result_img
@@ -29,6 +30,8 @@ python plot.py   # Plots are on ./result_img
 ```bash
 python download.py --multirun dataset=siftsmall,sift1m
 python run.py --multirun dataset=siftsmall,sift1m algo=linear,annoy,ivfpq,hnsw
+# Or, if you have GPUs, 
+# python run.py --multirun dataset=siftsmall,sift1m algo=linear,annoy,ivfpq,hnsw,linear_gpu
 python plot.py
 ```
 
