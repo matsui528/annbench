@@ -72,18 +72,19 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 
 
 
-## Add new algorithms/datasets
-- To add a new algorithm, please write a wrapper class on `./annbench/algo`. 
-The class must inherit `BaseANN` class. See [annoy.py](annbench/algo/annoy.py) for examples. Then please update [proxy.py](annbench/algo/proxy.py)
+## Add a new algorithm
+- Write a wrapper class on `./annbench/algo`. 
+The class must inherit `BaseANN` class. See [annoy.py](annbench/algo/annoy.py) for examples.
+- Update [./annbench/algo/proxy.py](annbench/algo/proxy.py)
 - Add the name of the library on [requirements.txt](requirements.txt).
 - Add a config file on `./conf/algo`. 
 - Make sure the algorithm runs on a single thread
-- To add a new dataset, in the same as adding a new algorithm, 
-you can write a wrapper class that inherits `BaseDataset` on `./annbench/dataset`.
+
+## Add a new dataset
+- Write a wrapper class that inherits `BaseDataset` on `./annbench/dataset`.
 An simple example is  [siftsmall.py](annbench/dataset/siftsmall.py).
-Don't forget to update [proxy.py](annbench/dataset/proxy.py).
+- Update [./annbench/dataset/proxy.py](annbench/dataset/proxy.py).
 - Add a config file on `./conf/dataset`.
-- Feel free to send a PR!
 
 
 ## Advanced
@@ -131,11 +132,8 @@ Don't forget to update [proxy.py](annbench/dataset/proxy.py).
 ## Reference
 - [ANN Benchmarks](https://github.com/erikbern/ann-benchmarks/)
 
+## Contribute
+- Feel free to open a pull request
+
 ## Author 
 - [Yusuke Matsui](http://yusukematsui.me)
-
-
-## Todo
-- evaluate memory consumption
-- default parameter
-- billion-scale evaluation
