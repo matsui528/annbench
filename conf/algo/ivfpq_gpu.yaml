@@ -1,0 +1,16 @@
+algo:
+  name: ivfpq_gpu
+
+param_index:
+  - M: 8
+    nlist: 100
+  - M: 16
+    nlist: 100
+
+param_query:
+  nprobe:
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16

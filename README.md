@@ -31,7 +31,7 @@ python plot.py   # Plots are on ./result_img
 python download.py --multirun dataset=siftsmall,sift1m
 python run.py --multirun dataset=siftsmall,sift1m algo=linear,annoy,ivfpq,hnsw
 # Or, if you have GPUs, 
-# python run.py --multirun dataset=siftsmall,sift1m algo=linear,annoy,ivfpq,hnsw,linear_gpu
+# python run.py --multirun dataset=siftsmall,sift1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu
 python plot.py
 ```
 
