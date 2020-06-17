@@ -3,6 +3,7 @@ from .ivfpq import IvfpqANN
 from .hnsw import HnswANN
 from .linear import LinearANN
 from .linear_gpu import LinearGpuANN
+from .ivfpq_gpu import IvfpqGpuANN
 
 def instantiate_algorithm(name):
     """
@@ -24,6 +25,8 @@ def instantiate_algorithm(name):
         return LinearANN()
     elif name == "linear_gpu":
         return LinearGpuANN()
+    elif name == "ivfpq_gpu":
+        return IvfpqGpuANN()
     else:
         return None
 
