@@ -1,6 +1,6 @@
 import hydra
 from hydra.utils import to_absolute_path
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
 import logging
 from pathlib import Path
 import yaml
@@ -9,9 +9,9 @@ import annbench
 log = logging.getLogger(__name__)
 
 
-@hydra.main(config_path="conf/config_plot.yaml")
+@hydra.main(config_path="conf", config_name="config_plot")
 def main(cfg: DictConfig) -> None:
-    print(cfg.pretty())
+    print(OmegaConf.to_yaml(cfg))
 
     out = Path(to_absolute_path(cfg.output))
     result_img = Path(to_absolute_path(cfg.result_img))

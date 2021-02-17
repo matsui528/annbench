@@ -1,6 +1,6 @@
 import hydra
 from hydra.utils import to_absolute_path
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
 import logging
 from pathlib import Path
 import annbench
@@ -10,9 +10,9 @@ import numpy as np
 log = logging.getLogger(__name__)
 
 
-@hydra.main(config_path="conf/config_run.yaml")
+@hydra.main(config_path="conf", config_name="config_run")
 def main(cfg: DictConfig) -> None:
-    print(cfg.pretty())
+    print(OmegaConf.to_yaml(cfg))
 
     # Instantiate a search algorithm class
     algo = annbench.instantiate_algorithm(name=cfg.algo.name)
