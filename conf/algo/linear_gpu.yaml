@@ -1,5 +1,6 @@
-algo:
-  name: linear_gpu
+# @package _group_
+
+name: linear_gpu
 
 param_index:
   - {}

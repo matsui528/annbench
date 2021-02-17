@@ -1,7 +1,5 @@
 defaults:
   - common
-  - dataset: siftsmall
-  - algo: annoy
 
 # Directories for data
 output: ./output

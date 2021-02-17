@@ -14,7 +14,7 @@ def main(cfg: DictConfig) -> None:
     dataset = annbench.instantiate_dataset(name=cfg.dataset.name,
                                            path=to_absolute_path(cfg.dataset.path))
 
-    log.info("Start to download {} on {}".format(cfg.dataset.name, cfg.dataset.path))
+    log.info(f"Start to download {cfg.dataset.name} on {cfg.dataset.path}")
     dataset.download()
 
 

@@ -1,5 +1,6 @@
-algo:
-  name: hnsw
+# @package _group_
+
+name: hnsw
 
 param_index:
   - ef_construction: 100

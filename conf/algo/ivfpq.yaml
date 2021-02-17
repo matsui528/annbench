@@ -1,5 +1,6 @@
-algo:
-  name: ivfpq
+# @package _group_
+
+name: ivfpq
 
 param_index:
   - M: 8

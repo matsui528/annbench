@@ -1,5 +1,6 @@
-algo:
-  name: annoy
+# @package _group_
+
+name: annoy
 
 param_index:
   - n_trees: 200

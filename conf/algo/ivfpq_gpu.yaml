@@ -1,5 +1,6 @@
-algo:
-  name: ivfpq_gpu
+# @package _group_
+
+name: ivfpq_gpu
 
 param_index:
   - M: 8
