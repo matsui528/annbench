@@ -1,15 +1,12 @@
-# annbench: simple and lightweight benchmark for approximate nearest neighbor search
+# annbench: a lightweight benchmark for approximate nearest neighbor search
 
-Benchmarking scripts for approximate nearest neighbor search algorithms in Python. The design of this repository is strongly influenced by a great project, [ann-benchmarks](https://github.com/erikbern/ann-benchmarks), that provides comprehensive and thorough benchmarks for various libraries. In contrast, we aim to provide more simple and lightweight benchmarks with the following features.
+`annbench` is a simple benchmark for approximate nearest neighbor search algorithms in Python. This repository design is strongly influenced by a great project, [ann-benchmarks](https://github.com/erikbern/ann-benchmarks), that provides comprehensive and thorough benchmarks for various algorithms. In contrast, we aim to deliver more lightweight and straightforward scripts with the following features.
 
-- Just three scripts
 - Support Euclidean distance only
 - Support Recall@1 only
-- Support libraries that can be installed via pip/conda only
+- Support libraries installable via pip/conda only
 - Search with a single thread
 - Sweep by a single query parameter
-- Parameter specialization for each dataset
-- Dynamic configuration from the command line
 
 ## [Leaderboard](https://github.com/matsui528/annbench_leaderboard)
 
@@ -26,7 +23,7 @@ python plot.py   # Plots are on ./result_img
 ```
 
 ## Run all algorithms on all dataset
-- It may take some hours for building. Once the indices are built, the search takes some minutes.
+- It may take some hours for building. Once you've finished building the indices, the search itself may take only some minutes.
 ```bash
 python download.py --multirun dataset=siftsmall,sift1m
 python run.py --multirun dataset=siftsmall,sift1m algo=linear,annoy,ivfpq,hnsw
@@ -38,28 +35,27 @@ python plot.py
 ## How it works
 
 ### Config
-- All config files are on `./conf`. You can edit config files to change parameters.
+- All config files are on `./conf`. You can edit the config files to change parameters.
 
 ### Download
 - Download a target dataset by `python download.py dataset=DATASET`. 
 Several datasets can be downloaded at once by `python download.py --multirun dataset=DATASET1,DATASET2,DATASET3`. See [hydra](https://hydra.cc/) for more detailed APIs for multirun.
-- The data will be placed on `./dataset`. The logs are written on `./log`.
+- The data will be placed on `./dataset`.
 
 ### Run
 - Evaluate a target algorithm (`ALGO`) with a target dataset (`DATASET`) by `python run.py dataset=DATASET algo=ALGO`. You can run multiple algorithms on multiple datasets by `python run.py --multirun dataset=DATASET1,DATASET2 algo=ALGO1,ALGO2`.
 - Indices (data structures for search) are stored on `./interim`. They are reused for each run with different query parameters.
-- The search result will be on `./output`. The same file will be on `./log` as well. For example with `algo=annoy` and `dataset=siftsmall`, the result file is `./output/siftsmall/annoy/result.yaml`, and it is identical to something like `./log/2020-03-11/22-30-59/0/result.yaml`.
+- The search result will be on `./output`.
 - By default, we run each algorithm `num_trial=10` times and return the average runtime. You can change this by: `python run.py num_trial=5`
 
 ### Plot
 - You can visualize the search result by `python plot.py`. This script checks `./output` and generate figures for each dataset on `./result_img`.
-- As is the case in `run.py`, the same figure is written on `./log` as well.
 - In order not to print query parameters, you can set the flag false: `python plot.py with_query_param=false`.
 - To change the size of the image: `python plot.py width=15 height=10`
 
 
-
-
+### Log
+- When running `run.py` or `plot.py`, the output files will be on `./log` as well. For example with `python run.py algo=annoy dataset=siftsmall`, the result file will be saved on (1) `./output/siftsmall/annoy/result.yaml` and (2) `./log/2020-03-11/22-30-59/0/result.yaml`.
 
 ## Supported datasets
 | dataset | dimension | #base | #query | #train | misc
@@ -99,7 +95,7 @@ An simple example is  [siftsmall.py](annbench/dataset/siftsmall.py).
 
 
 ### Index/query parameters
-- We define a simple guideline to set parameters. An algorithm has to have several **index parameters** and a single **query parameter**. For one set of index parameters, one **index (data structure)** is built. For this index, we run search by sweaping the query parameter.
+- We define a simple guideline to set parameters. An algorithm has to have several **index parameters** and a single **query parameter**. For one set of index parameters, one **index (data structure)** is built. For this index, we run the search by sweeping the query parameter.
 - For example with [ivfpq](conf/algo/ivfpq.yaml), let us consider the following index parameters:
   ```python
   param_index={"M": 8, "nlist": 100}
@@ -111,10 +107,10 @@ An simple example is  [siftsmall.py](annbench/dataset/siftsmall.py).
   param_query={"nprobe": [1, 2, 4, 8, 16]}
   ```
   In the search step, the index is read from the disk onto the memory first. Then we run the search five times, with `for nprobe in [1, 2, 4, 8, 16]`. This creates five results (five pairs of (recall, runtime)). By connecting these results, one polyline is drawn on the final plot.
-- Note that the values of the above query parameter must be sorted. If you forget to sort (e.g., `[1, 4, 2, 8, 16]`), the final graph would become weird.
+- Note that you must sort the values of the above query parameter. If you forget to sort (e.g., `[1, 4, 2, 8, 16]`), the final graph would become weird.
 
 ### Specialization
-- Index/query parameters for each algorithm is defined in `./conf/algo/`. These parameters are used for all datasets by default. If you'd like to specialize parameters for a specific dataset, you can defined the specialized version in `./conf/specialized_param/`.
+- Index/query parameters for each algorithm is defined in `./conf/algo/`. These parameters are used for all datasets by default. If you'd like to specialize parameters for a specific dataset, you can define the specialized version in `./conf/specialized_param/`.
 - For example, the default parameters for `ivfpq` is defined [here](conf/algo/ivfpq.yaml), where `nlist=100`. You can set `nlist=1000` for the sift1m dataset by adding a config file [here](conf/specialized_param/sift1m_ivfpq.yaml)
 
 

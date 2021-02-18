@@ -6,9 +6,6 @@ class HnswANN(BaseANN):
     def __init__(self):
         self.ef_construction, self.M, self.index = None, None, None
 
-    def __str__(self):
-        return f"Hnsw(ef_construction={self.ef_construction}, M={self.M}, index={self.index})"
-
     def set_index_param(self, param):
         self.ef_construction = param["ef_construction"]
         self.M = param["M"]
@@ -36,6 +33,6 @@ class HnswANN(BaseANN):
         self.index.load_index(path_to_index=path)
 
     def stringify_index_param(self, param):
-        return "efc{}_M{}.bin".format(param["ef_construction"], param["M"])
+        return f"efc{param['ef_construction']}_M{param['M']}.bin"
 
 
