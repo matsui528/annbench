@@ -3,7 +3,7 @@ defaults:
   - common
   - dataset: siftsmall
   - algo: annoy
-  - param: ${defaults.1.dataset}/${defaults.2.algo}
+  - specialized_param: ${defaults.1.dataset}_${defaults.2.algo}
     optional: true
 
 # Directories for data
