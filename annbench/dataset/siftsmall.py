@@ -10,7 +10,7 @@ class Siftsmall(BaseDataset):
         super().__init__(path=path)
 
     def __str__(self):
-        return "Siftsmall(path={})".format(self.path)
+        return f"Siftsmall(path={self.path})"
 
     def download(self):
         self.path.mkdir(exist_ok=True, parents=True)

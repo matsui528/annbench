@@ -10,7 +10,7 @@ class Sift1m(BaseDataset):
         super().__init__(path=path)
 
     def __str__(self):
-        return "Sift1m(path={})".format(self.path)
+        return f"Sift1m(path={self.path})"
 
     def download(self):
         self.path.mkdir(exist_ok=True, parents=True)

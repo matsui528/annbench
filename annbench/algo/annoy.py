@@ -7,7 +7,7 @@ class AnnoyANN(BaseANN):
         self.n_trees, self.index = None, None
 
     def __str__(self):
-        return "Annoy(n_trees={}, index={})".format(self.n_trees, self.index)
+        return f"Annoy(n_trees={self.n_trees}, index={self.index})"
 
     def set_index_param(self, param):
         self.n_trees = param["n_trees"]

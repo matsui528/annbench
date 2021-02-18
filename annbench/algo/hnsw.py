@@ -7,8 +7,7 @@ class HnswANN(BaseANN):
         self.ef_construction, self.M, self.index = None, None, None
 
     def __str__(self):
-        return "Hnsw(ef_construction={}, M={}, index={})".format(
-            self.ef_construction, self.M, self.index)
+        return f"Hnsw(ef_construction={self.ef_construction}, M={self.M}, index={self.index})"
 
     def set_index_param(self, param):
         self.ef_construction = param["ef_construction"]
