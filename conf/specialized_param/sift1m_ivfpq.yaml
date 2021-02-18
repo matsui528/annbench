@@ -1,3 +1,4 @@
+# @package _global_
 algo:
   param_index:
     - M: 8

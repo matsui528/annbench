@@ -114,8 +114,8 @@ An simple example is  [siftsmall.py](annbench/dataset/siftsmall.py).
 - Note that the values of the above query parameter must be sorted. If you forget to sort (e.g., `[1, 4, 2, 8, 16]`), the final graph would become weird.
 
 ### Specialization
-- Index/query parameters for each algorithm is defined in `./conf/algo/`. These parameters are used for all datasets by default. If you'd like to specialize parameters for a dataset, you can defined the specialized version in `./conf/param/`.
-- For example, the default parameters for `ivfpq` is defined [here](conf/algo/ivfpq.yaml), where `nlist=100`. You can set `nlist=1000` for the sift1m dataset by adding a config file [here](conf/param/sift1m/ivfpq.yaml)
+- Index/query parameters for each algorithm is defined in `./conf/algo/`. These parameters are used for all datasets by default. If you'd like to specialize parameters for a specific dataset, you can defined the specialized version in `./conf/specialized_param/`.
+- For example, the default parameters for `ivfpq` is defined [here](conf/algo/ivfpq.yaml), where `nlist=100`. You can set `nlist=1000` for the sift1m dataset by adding a config file [here](conf/specialized_param/sift1m_ivfpq.yaml)
 
 
 ### Dynamic configuration from the command line
