@@ -13,9 +13,6 @@ class IvfpqANN(BaseANN):
     def __init__(self):
         self.M, self.nlist, self.index = None, None, None
 
-    def __str__(self):
-        return f"Ivfpq(M={self.M}, nlist={self.nlist}, index={self.index})"
-
     def set_index_param(self, param):
         self.M, self.nlist = param["M"], param["nlist"]
 
@@ -46,6 +43,5 @@ class IvfpqANN(BaseANN):
         self.M, self.nlist = self.index.pq.M, self.index.nlist
 
     def stringify_index_param(self, param):
-        return "M{}_nlist{}.bin".format(param["M"], param["nlist"])
-
+        return f"M{param['M']}_nlist{param['nlist']}.bin"
 

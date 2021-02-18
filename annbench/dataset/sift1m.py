@@ -9,9 +9,6 @@ class Sift1m(BaseDataset):
     def __init__(self, path):
         super().__init__(path=path)
 
-    def __str__(self):
-        return f"Sift1m(path={self.path})"
-
     def download(self):
         self.path.mkdir(exist_ok=True, parents=True)
         tar_path = self.path / "sift.tar.gz"
