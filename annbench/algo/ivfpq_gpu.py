@@ -14,9 +14,7 @@ class IvfpqGpuANN(BaseANN):
         self.M, self.nlist, self.index = None, None, None
 
     def __str__(self):
-        return "Ivfpq(M={}, nlist={}, index={})".format(
-            self.M, self.nlist, self.index
-        )
+        return f"Ivfpq(M={self.M}, nlist={self.nlist}, index={self.index})"
 
     def set_index_param(self, param):
         self.M, self.nlist = param["M"], param["nlist"]

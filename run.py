@@ -1,6 +1,6 @@
 import hydra
 from hydra.utils import to_absolute_path
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
 import logging
 from pathlib import Path
 import annbench
@@ -10,9 +10,9 @@ import numpy as np
 log = logging.getLogger(__name__)
 
 
-@hydra.main(config_path="conf/config_run.yaml")
+@hydra.main(config_path="conf", config_name="config_run")
 def main(cfg: DictConfig) -> None:
-    print(cfg.pretty())
+    print(OmegaConf.to_yaml(cfg))
 
     # Instantiate a search algorithm class
     algo = annbench.instantiate_algorithm(name=cfg.algo.name)
@@ -23,8 +23,8 @@ def main(cfg: DictConfig) -> None:
                                            path=to_absolute_path(cfg.dataset.path))
 
     ret_all = []
-    for param_index in cfg.param_index:
-        log.info("Start to build. index_param=" + str(param_index))
+    for param_index in cfg.algo.param_index:
+        log.info(f"Start to build. index_param={param_index}")
 
         # The absolute path to the index
         p = Path(to_absolute_path(cfg.interim)) / cfg.dataset.name / cfg.algo.name \
@@ -46,10 +46,12 @@ def main(cfg: DictConfig) -> None:
 
         ret = []
         # Run search for each param_query
-        pname, vals = next(cfg.param_query.items())  # e.g., pname="search_k", vals=[100, 200, 400]
+        pname, vals = list(cfg.algo.param_query.items())[0]  # e.g., pname="search_k", vals=[100, 200, 400]
         for val in vals:
             param_query = {pname: val}  # e.g., param_query={"search_k": 100}
-            log.info("Start to search. param_query=" + str(param_query))
+            log.info(f"Start to search. param_query={param_query}")
+
+            # Run cfg.num_trial times, and take the average
             runtime_per_query, recall = np.mean(
                 [annbench.util.evaluate(algo=algo, vecs_query=dataset.vecs_query(), gt=dataset.groundtruth(),
                                         topk=1, r=1, param_query=param_query) for _ in range(cfg.num_trial)], axis=0)

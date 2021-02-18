@@ -1,5 +1,6 @@
-param_index:
-  - M: 8
-    nlist: 1000
-  - M: 16
-    nlist: 1000
+algo:
+  param_index:
+    - M: 8
+      nlist: 1000
+    - M: 16
+      nlist: 1000

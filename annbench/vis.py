@@ -27,7 +27,7 @@ def draw(lines, xlabel, ylabel, title, filename, with_ctrl, width, height):
         plt.plot(line["xs"], line["ys"], 'o-', label=line["label"])
         if with_ctrl:
             for x, y, ctrl in zip(line["xs"], line["ys"], line["ctrls"]):
-                plt.annotate(s=line["ctrl_label"] + ":" + str(ctrl), xy=(x, y),
+                plt.annotate(text=line["ctrl_label"] + ":" + str(ctrl), xy=(x, y),
                              xytext=(x, y+50))
 
     plt.xlabel(xlabel)

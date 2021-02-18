@@ -1,6 +1,6 @@
 import hydra
 from hydra.utils import to_absolute_path
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
 import logging
 from pathlib import Path
 import yaml
@@ -9,9 +9,9 @@ import annbench
 log = logging.getLogger(__name__)
 
 
-@hydra.main(config_path="conf/config_plot.yaml")
+@hydra.main(config_path="conf", config_name="config_plot")
 def main(cfg: DictConfig) -> None:
-    print(cfg.pretty())
+    print(OmegaConf.to_yaml(cfg))
 
     out = Path(to_absolute_path(cfg.output))
     result_img = Path(to_absolute_path(cfg.result_img))
@@ -24,7 +24,7 @@ def main(cfg: DictConfig) -> None:
         for p_algo in sorted(p_dataset.glob("*")):
             if p_algo.is_file():
                 continue
-            log.info("Check {}".format((p_algo / "result.yaml").resolve()))
+            log.info(f"Check {(p_algo / 'result.yaml').resolve()}")
             with (p_algo / "result.yaml").open("rt") as f:
                 ret_all = yaml.safe_load(f)
             for ret in ret_all:
@@ -41,15 +41,15 @@ def main(cfg: DictConfig) -> None:
                 }
                 lines.append(line)
 
-        log.info("Write on {}".format(result_img.resolve()))
+        log.info(f"Write on {result_img.resolve()}")
 
         # Save the image on the result_img directory and a working directory (./log) as a log
-        for path_img in [result_img / "{}.png".format(p_dataset.name), "{}.png".format(p_dataset.name)]:
+        for path_img in [result_img / f"{p_dataset.name}.png", f"{p_dataset.name}.png"]:
             annbench.vis.draw(lines=lines, xlabel="recall@1", ylabel="query/sec (1/s)", title=p_dataset.name,
                               filename=path_img, with_ctrl=cfg.with_query_param, width=cfg.width, height=cfg.height)
 
         # Save the summary on the result_img directory and a working directory (./log) as a log
-        for path_summary in [result_img / "{}.yaml".format(p_dataset.name), "{}.yaml".format(p_dataset.name)]:
+        for path_summary in [result_img / f"{p_dataset.name}.yaml", f"{p_dataset.name}.yaml"]:
             with open(path_summary, "wt") as f:
                 yaml.dump(lines, f)
 

@@ -1,5 +1,6 @@
-algo:
-  name: linear
+# @package _group_
+
+name: linear
 
 param_index:
   - {}

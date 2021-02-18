@@ -14,7 +14,7 @@ class LinearGpuANN(BaseANN):
         self.index = None
 
     def __str__(self):
-        return "LinearGpu(index={})".format(self.index)
+        return f"LinearGpu(index={self.index})"
 
     def set_index_param(self, param):
         pass
