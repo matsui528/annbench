@@ -1,5 +1,6 @@
 from .siftsmall import Siftsmall
 from .sift1m import Sift1m
+from .deep1m import Deep1m
 
 def instantiate_dataset(name, path):
     """
@@ -15,6 +16,8 @@ def instantiate_dataset(name, path):
         return Siftsmall(path=path)
     elif name == "sift1m":
         return Sift1m(path=path)
+    elif name == "deep1m":
+        return Deep1m(path=path)
     else:
         return None
 
