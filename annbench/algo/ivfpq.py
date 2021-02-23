@@ -45,3 +45,10 @@ class IvfpqANN(BaseANN):
     def stringify_index_param(self, param):
         return f"M{param['M']}_nlist{param['nlist']}.bin"
 
+
+class Ivfpq4bitANN(IvfpqANN):
+    def train(self, vecs):
+        D = vecs.shape[1]
+        quantizer = faiss.IndexFlatL2(D)
+        self.index = faiss.IndexIVFPQFastScan(quantizer, D, self.nlist, self.M, 4)
+        self.index.train(vecs)

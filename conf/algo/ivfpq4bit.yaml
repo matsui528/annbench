@@ -1,0 +1,17 @@
+# @package _group_
+
+name: ivfpq4bit
+
+param_index:
+  - M: 16
+    nlist: 100
+  - M: 32
+    nlist: 100
+
+param_query:
+  nprobe:
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
