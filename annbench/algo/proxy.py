@@ -1,5 +1,5 @@
 from .annoy import AnnoyANN
-from .ivfpq import IvfpqANN
+from .ivfpq import IvfpqANN, Ivfpq4bitANN
 from .hnsw import HnswANN
 from .linear import LinearANN
 from .linear_gpu import LinearGpuANN
@@ -27,6 +27,8 @@ def instantiate_algorithm(name):
         return LinearGpuANN()
     elif name == "ivfpq_gpu":
         return IvfpqGpuANN()
+    elif name =="ivfpq4bit":
+        return Ivfpq4bitANN()
     else:
         return None
 

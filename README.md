@@ -73,8 +73,9 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 | deep1m    |  96 | 1,000,000 | 10,000 | 100,000 | The first 1M vectors of [Deep1B](https://github.com/arbabenko/GNOIMI). [Hepler scripts](https://github.com/matsui528/deep1b_gt)|
 
 ## Supported Algorithms
-- [linear scan (faiss)](https://github.com/facebookresearch/faiss)
-- [ivfpq (faiss)](https://github.com/facebookresearch/faiss)
+- [linear scan (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexFlat.h)
+- [ivfpq (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexIVFPQ.h)
+- [ivfpq with 4-bit pq (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexIVFPQFastScan.h)
 - [annoy](https://github.com/spotify/annoy)
 - [hnsw](https://github.com/nmslib/hnswlib)
 
