@@ -25,12 +25,13 @@ python plot.py   # Plots are on ./result_img
 ```
 
 ## Run all algorithms on all dataset
-- It may take some hours for building. Once you've finished building the indices, the search itself may take only some minutes.
 ```bash
-python download.py --multirun dataset=siftsmall,sift1m
-python run.py --multirun dataset=siftsmall,sift1m algo=linear,annoy,ivfpq,hnsw
+# Downloading deep1m takes some hours
+python download.py --multirun dataset=siftsmall,sift1m,deep1m
+# Will take some hours
+python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw
 # Or, if you have GPUs, 
-# python run.py --multirun dataset=siftsmall,sift1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu
+# python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu
 python plot.py
 ```
 
@@ -60,10 +61,11 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 - When running `run.py` or `plot.py`, the output files will be on `./log` as well. For example with `python run.py algo=annoy dataset=siftsmall`, the result file will be saved on (1) `./output/siftsmall/annoy/result.yaml` and (2) `./log/2020-03-11/22-30-59/0/result.yaml`.
 
 ## Supported datasets
-| dataset | dimension | #base | #query | #train | misc
+| dataset | dim | #base | #query | #train | misc
 | --- | --- | --- | --- | --- | --- |
 | siftsmall | 128 |    10,000 |    100 |  25,000 | A toy dataset for hello-world|
 | sift1m    | 128 | 1,000,000 | 10,000 | 100,000 | |
+| deep1m    |  96 | 1,000,000 | 10,000 | 100,000 | The first 1M vectors of [Deep1B](https://github.com/arbabenko/GNOIMI). [Hepler scripts](https://github.com/matsui528/deep1b_gt)|
 
 ## Supported Algorithms
 - [linear scan (faiss)](https://github.com/facebookresearch/faiss)
