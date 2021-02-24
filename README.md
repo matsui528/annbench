@@ -9,7 +9,8 @@
 - Sweep by a single query parameter
 
 ## [Leaderboard](https://github.com/matsui528/annbench_leaderboard)
-![](https://github.com/matsui528/annbench_leaderboard/blob/main/result_img/2021_02_21/sift1m.png?raw=True)
+- AWS Deep Learning AMI, c5.4xlarge
+![](https://github.com/matsui528/annbench_leaderboard/blob/main/result_img/2021_02_23/deep1m.png?raw=True)
 
 
 ## Getting started
