@@ -29,6 +29,7 @@ class HnswANN(BaseANN):
         self.index.save_index(path_to_index=path)
 
     def read(self, path, D):
+        # self.ef_construction and self.M are not set after reading
         self.index = hnswlib.Index(space='l2', dim=D)
         self.index.load_index(path_to_index=path)
 
