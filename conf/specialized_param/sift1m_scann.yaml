@@ -1,0 +1,11 @@
+# @package _global_
+algo:
+  param_index:
+    - num_leaves: 2000
+      reorder: 0
+    - num_leaves: 2000
+      reorder: 100
+    - num_leaves: 4000
+      reorder: 0
+    - num_leaves: 4000
+      reorder: 100
