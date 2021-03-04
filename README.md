@@ -34,9 +34,9 @@ python plot.py   # Plots are on ./result_img
 python download.py --multirun dataset=siftsmall,sift1m,deep1m
 
 # Will take some hours
-python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,ivfpq4bit
+python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,ivfpq4bit,scann
 # Or, if you have GPUs, 
-# python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu,ivfpq4bit
+# python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu,ivfpq4bit,scann
 
 python plot.py
 ```
@@ -79,6 +79,7 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 - [ivfpq with 4-bit quantizer (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexIVFPQFastScan.h)
 - [annoy](https://github.com/spotify/annoy)
 - [hnsw](https://github.com/nmslib/hnswlib)
+- [scann](https://github.com/google-research/google-research/tree/master/scann)
 
 
 
