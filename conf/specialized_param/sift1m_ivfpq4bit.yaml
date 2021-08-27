@@ -1,7 +1,15 @@
 # @package _global_
 algo:
   param_index:
+    - M: 16
+      nlist: 1000
+      quantizer: flat
     - M: 32
       nlist: 1000
-    - M: 64
+      quantizer: flat
+    - M: 16
       nlist: 1000
+      quantizer: hnsw
+    - M: 32
+      nlist: 1000
+      quantizer: hnsw

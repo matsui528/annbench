@@ -5,8 +5,16 @@ name: ivfpq
 param_index:
   - M: 8
     nlist: 100
+    quantizer: flat
   - M: 16
     nlist: 100
+    quantizer: flat
+  - M: 8
+    nlist: 100
+    quantizer: hnsw
+  - M: 16
+    nlist: 100
+    quantizer: hnsw
 
 param_query:
   nprobe:
