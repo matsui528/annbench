@@ -34,9 +34,9 @@ python plot.py   # Plots are on ./result_img
 python download.py --multirun dataset=siftsmall,sift1m,deep1m
 
 # Will take some hours
-python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,ivfpq4bit,scann
+python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,ivfpq4bit,scann,pq,pq4bit
 # Or, if you have GPUs, 
-# python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu,ivfpq4bit,scann
+# python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu,ivfpq4bit,scann,pq,pq4bit
 
 python plot.py
 ```
@@ -75,6 +75,8 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 
 ## Supported Algorithms
 - [linear scan (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexFlat.h)
+- [pq (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexPQ.h)
+- [4-bit pq(faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexPQFastScan.h)
 - [ivfpq (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexIVFPQ.h)
 - [ivfpq with 4-bit quantizer (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexIVFPQFastScan.h)
 - [annoy](https://github.com/spotify/annoy)
