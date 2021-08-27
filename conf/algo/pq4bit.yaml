@@ -1,0 +1,11 @@
+# @package _group_
+
+name: pq4bit
+
+param_index:
+  - M: 16
+  - M: 32
+
+param_query:
+  dummy:
+    - 0

@@ -1,0 +1,11 @@
+# @package _group_
+
+name: pq
+
+param_index:
+  - M: 8
+  - M: 16
+
+param_query:
+  dummy:
+    - 0
