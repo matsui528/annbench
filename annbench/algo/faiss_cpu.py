@@ -95,7 +95,22 @@ class IvfpqANN(BaseANN):
         self.index.train(vecs)
 
     def add(self, vecs):
-        self.index.add(vecs)
+        if hasattr(vecs, '__iter__'):  # if vecs is iterator such as Deeb1B
+            from more_itertools import chunked
+            import numpy as np
+
+            # [todo] N is fixed for 1B. To be updated.
+            batch_size = 1000 * 1000
+            N = 1000 * 1000 * 1000
+
+            for n, vecs_batch in enumerate(chunked(vecs, batch_size)):
+                print(f"{n}/{int(N/batch_size)}")
+                self.index.add(np.array(vecs_batch).astype(np.float32))
+        else:
+            self.index.add(vecs)
+
+
+
 
     def query(self, vecs, topk, param):
         self.index.nprobe = param["nprobe"]

@@ -1,0 +1,6 @@
+# @package _global_
+algo:
+  param_index:
+    - M: 16
+      nlist: 30000
+      quantizer: hnsw
