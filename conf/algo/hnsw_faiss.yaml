@@ -1,0 +1,17 @@
+# @package _group_
+
+name: hnsw_faiss
+
+param_index:
+  - ef_construction: 100
+    M: 4
+  - ef_construction: 200
+    M: 32
+
+param_query:
+  ef:
+    - 1
+    - 4
+    - 16
+    - 64
+    - 256
