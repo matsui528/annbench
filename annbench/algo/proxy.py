@@ -24,6 +24,7 @@ if check_module("faiss"):
         PqANN,
         Pq4bitANN,
         HnswFaissANN,
+        NsgANN,
     )
     from .faiss_gpu import LinearGpuANN, IvfpqGpuANN
 
@@ -61,6 +62,8 @@ def instantiate_algorithm(name):
         return Pq4bitANN()
     elif name == "hnsw_faiss":
         return HnswFaissANN()
+    elif name == "nsg":
+        return NsgANN()
     elif name == "scann":
         return ScannANN()
     else:

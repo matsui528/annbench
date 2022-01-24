@@ -182,3 +182,36 @@ class HnswFaissANN(BaseANN):
 
     def stringify_index_param(self, param):
         return f"efc{param['ef_construction']}_M{param['M']}.bin"
+
+
+class NsgANN(BaseANN):
+    def __init__(self):
+        self.build_type, self.M, self.index = None, None, None
+
+    def set_index_param(self, param):
+        self.build_type = param["build_type"]
+        self.M = param["M"]
+
+    def has_train(self):
+        return False
+
+    def add(self, vecs):
+        D = vecs.shape[1]
+        self.index = faiss.IndexNSGFlat(D, self.M)
+        self.index.build_type = self.build_type
+        self.index.add(vecs)
+
+    def query(self, vecs, topk, param):
+        faiss.omp_set_num_threads(1)  # Make sure this is on a single thread mode
+        self.index.nsg.search_L = param["search_L"]
+        _, ids = self.index.search(x=vecs, k=topk)
+        return ids
+
+    def write(self, path):
+        faiss.write_index(self.index, path)
+
+    def read(self, path, D=None):
+        self.index = faiss.read_index(path)
+
+    def stringify_index_param(self, param):
+        return f"buildT{param['build_type']}_M{param['M']}.bin"
