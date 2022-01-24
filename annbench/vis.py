@@ -26,7 +26,7 @@ def draw(lines, xlabel, ylabel, title, filename, with_ctrl, width, height):
             assert key in line
 
     for line in lines:
-        plt.plot(line["xs"], line["ys"], 'o-', label=line["label"], marker=next(marker), linestyle=next(linestyle))
+        plt.plot(line["xs"], line["ys"], label=line["label"], marker=next(marker), linestyle=next(linestyle))
         if with_ctrl:
             for x, y, ctrl in zip(line["xs"], line["ys"], line["ctrls"]):
                 plt.annotate(text=line["ctrl_label"] + ":" + str(ctrl), xy=(x, y),
