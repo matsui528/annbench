@@ -34,9 +34,9 @@ python plot.py   # Plots are on ./result_img
 python download.py --multirun dataset=siftsmall,sift1m,deep1m
 
 # Will take some hours
-python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,ivfpq4bit,scann,pq,pq4bit
+python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,ivfpq4bit,scann,pq,pq4bit,hnsw_faiss,nsg
 # Or, if you have GPUs, 
-# python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu,ivfpq4bit,scann,pq,pq4bit
+# python run.py --multirun dataset=siftsmall,sift1m,deep1m algo=linear,annoy,ivfpq,hnsw,linear_gpu,ivfpq_gpu,ivfpq4bit,scann,pq,pq4bit,hnsw_faiss,nsg
 
 python plot.py
 ```
@@ -74,14 +74,18 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 | deep1m    |  96 | 1,000,000 | 10,000 | 100,000 | The first 1M vectors of [Deep1B](https://github.com/arbabenko/GNOIMI). [Hepler scripts](https://github.com/matsui528/deep1b_gt)|
 
 ## Supported Algorithms
-- [linear scan (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexFlat.h)
-- [pq (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexPQ.h)
-- [4-bit pq(faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexPQFastScan.h)
-- [ivfpq (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexIVFPQ.h)
+- [linear scan (faiss)](https://github.com/facebookresearch/faiss/blob/main/faiss/IndexFlat.h)
+- [pq (faiss)](https://github.com/facebookresearch/faiss/blob/main/faiss/IndexPQ.h)
+- [4-bit pq(faiss)](https://github.com/facebookresearch/faiss/blob/main/faiss/IndexPQFastScan.h)
+- [ivfpq (faiss)](https://github.com/facebookresearch/faiss/blob/main/faiss/IndexIVFPQ.h)
 - [ivfpq with 4-bit quantizer (faiss)](https://github.com/facebookresearch/faiss/blob/master/faiss/IndexIVFPQFastScan.h)
+- [hnsw (faiss)](https://github.com/facebookresearch/faiss/blob/main/faiss/IndexHNSW.h)
+- [nsg (faiss)](https://github.com/facebookresearch/faiss/blob/main/faiss/IndexNSG.h)
 - [annoy](https://github.com/spotify/annoy)
-- [hnsw](https://github.com/nmslib/hnswlib)
+- [hnsw (hnswlib)](https://github.com/nmslib/hnswlib)
 - [scann](https://github.com/google-research/google-research/tree/master/scann)
+
+Note that `hnsw (hnswlib)` is an original implementation by the original authors, and `hnsw (faiss)` is a re-implemented version by the faiss team.
 
 
 
@@ -145,8 +149,9 @@ An simple example is  [siftsmall.py](annbench/dataset/siftsmall.py).
 ## Reference
 - [ANN Benchmarks](https://github.com/erikbern/ann-benchmarks/)
 
-## Contribute
-- Feel free to open a pull request
+## Contributors
+Feel free to open a pull request.
+- [@foreverYoungGitHub](https://github.com/foreverYoungGitHub) ([hnsw_faiss and nsg](https://github.com/matsui528/annbench/pull/18))
 
 ## Author 
 - [Yusuke Matsui](http://yusukematsui.me)
