@@ -1,5 +1,6 @@
 import importlib.util
 
+
 def check_module(module_name):
     # Return true only if the module has been installed
     spec = importlib.util.find_spec(module_name)
@@ -8,6 +9,7 @@ def check_module(module_name):
     else:
         return True
 
+
 if check_module("annoy"):
     from .annoy import AnnoyANN
 
@@ -15,7 +17,15 @@ if check_module("hnswlib"):
     from .hnsw import HnswANN
 
 if check_module("faiss"):
-    from .faiss_cpu import LinearANN, IvfpqANN, Ivfpq4bitANN, PqANN, Pq4bitANN
+    from .faiss_cpu import (
+        LinearANN,
+        IvfpqANN,
+        Ivfpq4bitANN,
+        PqANN,
+        Pq4bitANN,
+        HnswFaissANN,
+        NsgANN,
+    )
     from .faiss_gpu import LinearGpuANN, IvfpqGpuANN
 
 if check_module("scann"):
@@ -46,14 +56,15 @@ def instantiate_algorithm(name):
         return IvfpqGpuANN()
     elif name == "ivfpq4bit":
         return Ivfpq4bitANN()
-    elif name =="pq":
+    elif name == "pq":
         return PqANN()
-    elif name =="pq4bit":
+    elif name == "pq4bit":
         return Pq4bitANN()
+    elif name == "hnsw_faiss":
+        return HnswFaissANN()
+    elif name == "nsg":
+        return NsgANN()
     elif name == "scann":
         return ScannANN()
     else:
         return None
-
-
-

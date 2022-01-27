@@ -1,0 +1,15 @@
+# @package _group_
+
+name: nsg
+
+param_index:
+  - build_type: 1
+    M: 32
+
+param_query:
+  search_L:
+    - 1
+    - 4
+    - 16
+    - 64
+    - 256

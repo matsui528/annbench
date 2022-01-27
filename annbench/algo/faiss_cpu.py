@@ -2,7 +2,6 @@ from .base import BaseANN
 import faiss
 
 
-
 class LinearANN(BaseANN):
     def __init__(self):
         self.index = None
@@ -64,6 +63,7 @@ class PqANN(BaseANN):
     def stringify_index_param(self, param):
         return f"M{param['M']}.bin"
 
+
 class Pq4bitANN(PqANN):
     def train(self, vecs):
         self.index = faiss.IndexPQFastScan(vecs.shape[1], self.M, 4)
@@ -75,15 +75,18 @@ class IvfpqANN(BaseANN):
         self.M, self.nlist, self.quantizer, self.index = None, None, None, None
 
     def set_index_param(self, param):
-        self.M, self.nlist, self.quantizer = param["M"], param["nlist"], param["quantizer"]
-
+        self.M, self.nlist, self.quantizer = (
+            param["M"],
+            param["nlist"],
+            param["quantizer"],
+        )
 
     def has_train(self):
         return True
 
     def train(self, vecs):
         D = vecs.shape[1]
-        
+
         if self.quantizer == "flat":
             quantizer = faiss.IndexFlatL2(D)
         elif self.quantizer == "hnsw":
@@ -95,7 +98,7 @@ class IvfpqANN(BaseANN):
         self.index.train(vecs)
 
     def add(self, vecs):
-        if hasattr(vecs, '__iter__'):  # if vecs is iterator such as Deeb1B
+        if hasattr(vecs, "__iter__"):  # if vecs is iterator such as Deeb1B
             from more_itertools import chunked
             import numpy as np
 
@@ -108,9 +111,6 @@ class IvfpqANN(BaseANN):
                 self.index.add(np.array(vecs_batch).astype(np.float32))
         else:
             self.index.add(vecs)
-
-
-
 
     def query(self, vecs, topk, param):
         self.index.nprobe = param["nprobe"]
@@ -132,7 +132,6 @@ class IvfpqANN(BaseANN):
         else:
             assert 0, f"the path doesn't contain a proper quantizer name: {self.path}"
 
-
     def stringify_index_param(self, param):
         return f"M{param['M']}_nlist{param['nlist']}_quantizer_{param['quantizer']}.bin"
 
@@ -140,7 +139,7 @@ class IvfpqANN(BaseANN):
 class Ivfpq4bitANN(IvfpqANN):
     def train(self, vecs):
         D = vecs.shape[1]
-        
+
         if self.quantizer == "flat":
             quantizer = faiss.IndexFlatL2(D)
         elif self.quantizer == "hnsw":
@@ -150,3 +149,69 @@ class Ivfpq4bitANN(IvfpqANN):
 
         self.index = faiss.IndexIVFPQFastScan(quantizer, D, self.nlist, self.M, 4)
         self.index.train(vecs)
+
+
+class HnswFaissANN(BaseANN):
+    def __init__(self):
+        self.ef_construction, self.M, self.index = None, None, None
+
+    def set_index_param(self, param):
+        self.ef_construction = param["ef_construction"]
+        self.M = param["M"]
+
+    def has_train(self):
+        return False
+
+    def add(self, vecs):
+        D = vecs.shape[1]
+        self.index = faiss.IndexHNSWFlat(D, self.M)
+        self.index.hnsw.efConstruction = self.ef_construction
+        self.index.add(vecs)
+
+    def query(self, vecs, topk, param):
+        faiss.omp_set_num_threads(1)  # Make sure this is on a single thread mode
+        self.index.hnsw.efSearch = param["ef"]
+        _, ids = self.index.search(x=vecs, k=topk)
+        return ids
+
+    def write(self, path):
+        faiss.write_index(self.index, path)
+
+    def read(self, path, D=None):
+        self.index = faiss.read_index(path)
+
+    def stringify_index_param(self, param):
+        return f"efc{param['ef_construction']}_M{param['M']}.bin"
+
+
+class NsgANN(BaseANN):
+    def __init__(self):
+        self.build_type, self.M, self.index = None, None, None
+
+    def set_index_param(self, param):
+        self.build_type = param["build_type"]
+        self.M = param["M"]
+
+    def has_train(self):
+        return False
+
+    def add(self, vecs):
+        D = vecs.shape[1]
+        self.index = faiss.IndexNSGFlat(D, self.M)
+        self.index.build_type = self.build_type
+        self.index.add(vecs)
+
+    def query(self, vecs, topk, param):
+        faiss.omp_set_num_threads(1)  # Make sure this is on a single thread mode
+        self.index.nsg.search_L = param["search_L"]
+        _, ids = self.index.search(x=vecs, k=topk)
+        return ids
+
+    def write(self, path):
+        faiss.write_index(self.index, path)
+
+    def read(self, path, D=None):
+        self.index = faiss.read_index(path)
+
+    def stringify_index_param(self, param):
+        return f"buildT{param['build_type']}_M{param['M']}.bin"
