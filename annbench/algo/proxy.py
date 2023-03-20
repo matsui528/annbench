@@ -31,6 +31,8 @@ if check_module("faiss"):
 if check_module("scann"):
     from .scann import ScannANN
 
+if check_module("pynndescent"):
+    from .pynndescent import PynndescentANN
 
 def instantiate_algorithm(name):
     """
@@ -66,5 +68,7 @@ def instantiate_algorithm(name):
         return NsgANN()
     elif name == "scann":
         return ScannANN()
+    elif name == "pynndescent":
+        return PynndescentANN()
     else:
         return None
