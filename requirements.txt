@@ -4,3 +4,4 @@ matplotlib
 annoy
 hnswlib
 scann
+pynndescent
