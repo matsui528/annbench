@@ -84,6 +84,7 @@ Several datasets can be downloaded at once by `python download.py --multirun dat
 - [annoy](https://github.com/spotify/annoy)
 - [hnsw (hnswlib)](https://github.com/nmslib/hnswlib)
 - [scann](https://github.com/google-research/google-research/tree/master/scann)
+- [pynndescent](https://github.com/lmcinnes/pynndescent)
 
 Note that `hnsw (hnswlib)` is an original implementation by the original authors, and `hnsw (faiss)` is a re-implemented version by the faiss team.
 
