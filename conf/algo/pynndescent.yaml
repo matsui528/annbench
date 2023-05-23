@@ -1,0 +1,19 @@
+# @package _group_
+
+name: pynndescent
+
+param_index:
+  - n_neighbors: 10
+    diversify_prob: 1.0
+    pruning_degree_multiplier: 1.5
+  - n_neighbors: 30
+    diversify_prob: 1.0
+    pruning_degree_multiplier: 1.5
+
+param_query:
+  epsilon:
+    - 0.1
+    - 0.3
+    - 0.5
+    - 0.8
+    - 1.0
